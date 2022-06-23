@@ -4,8 +4,7 @@
 #include <iterator>
 #include <thread>
 #include <numeric>
-#include "Marker.cpp"
-
+#include "Marker.h"
 
 int main()
 {
@@ -26,5 +25,14 @@ int main()
     {
         threads[i] = std::thread(marker, std::ref(vec), std::ref(i));
     }
+
+    for (auto &th : threads)
+    {
+        th.join();
+    }
     
+    for (auto num : vec)
+    {
+        std::cout << num << " ";
+    }
 }
